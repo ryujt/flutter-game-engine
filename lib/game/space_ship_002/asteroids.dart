@@ -1,15 +1,14 @@
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../game_engine.dart';
 
+typedef CheckCollisionCallback = bool Function(GameControl target);
+
 class Asteroids extends GameControl {
-  Asteroids() {
-    x = -100;
-    y = -100;
-  }
+  final CheckCollisionCallback onCheckCollision;
+
+  Asteroids({required this.onCheckCollision});
 
   @override
   void tick(Canvas canvas, int current, int term) {
@@ -23,7 +22,7 @@ class Asteroids extends GameControl {
   void _createAsteroid() {
     // screen: (375, 590), Asteroid: (30, 30)
     var _x = _random.nextDouble() * (375.0 - 30.0);
-    getGameControlGroup()?.addControl(Asteroid(_x, 0));
+    getGameControlGroup()?.addControl(Asteroid(_x, 0, onCheckCollision));
   }
 
   int _relaseInterval = 500;
@@ -32,21 +31,27 @@ class Asteroids extends GameControl {
 }
 
 class Asteroid extends GameControl {
-  Asteroid(double ax, double ay) {
-    print(ax);
+  Asteroid(double ax, double ay, CheckCollisionCallback onCheckCollision)
+  {
     x = ax;
     y = ay;
     width = 30;
     height = 30;
     paint.color = Colors.red;
+    _onCheckCollision = onCheckCollision;
   }
 
   @override
   void tick(Canvas canvas, int current, int term) {
-    y = y + _interval;
+    y = y + _speed;
     if (y > 590) deleted = true;
     canvas.drawCircle(Offset( x + 15, y + 15 ), 15, paint);
+
+    if (_onCheckCollision != null) {
+      if (_onCheckCollision!(this)) deleted = true;
+    }
   }
 
-  double _interval = 2;
+  double _speed = 2;
+  CheckCollisionCallback? _onCheckCollision;
 }

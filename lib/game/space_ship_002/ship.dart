@@ -11,6 +11,12 @@ class Ship extends GameControl {
     paint.color = Colors.blue;
   }
 
+  bool checkCollisionAndExplode(GameControl target) {
+    var result = checkCollision() == target;
+    if (result) deleted = true;
+    return result;
+  }
+
   @override
   void tick(Canvas canvas, int current, int term) {
     x = x + _direction;

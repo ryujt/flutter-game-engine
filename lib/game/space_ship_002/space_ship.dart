@@ -13,7 +13,11 @@ class SpaceShip extends StatelessWidget {
     );
 
     _ship = Ship();
-    _asteroids = Asteroids();
+    _asteroids = Asteroids(
+      onCheckCollision: (GameControl target) {
+        return _ship.checkCollisionAndExplode(target);
+      }
+    );
 
     _gameEngine.getControls().addControl(_joystick);
     _gameEngine.getControls().addControl(_ship);
