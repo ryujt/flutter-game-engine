@@ -134,13 +134,8 @@ class GameControl {
     _gameControlGroup!._controls.add(this);
   }
 
-  GameControl? checkCollision() {
-    if (_gameControlGroup == null) return null;
-    for (var control in _gameControlGroup!._controls) {
-      if (control == this) continue;
-      if (_controlCollision(this, control)) return control;
-    }
-    return null;
+  bool checkCollision(GameControl target) {
+    return _controlCollision(this, target);
   }
 
   List<GameControl> checkCollisions() {

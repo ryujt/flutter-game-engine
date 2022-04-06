@@ -12,7 +12,7 @@ class Ship extends GameControl {
   }
 
   bool checkCollisionAndExplode(GameControl target) {
-    var result = checkCollision() == target;
+    var result = checkCollision(target);
     if (result) deleted = true;
     return result;
   }
