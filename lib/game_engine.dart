@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 class GameEngine {
   GameEngine() {
-    //
+    _controls._gameEngine = this;
   }
 
   void start() {
@@ -153,6 +153,10 @@ class GameControl {
     return list;
   }
 
+  GameEngine? getGameEngine() { return _gameEngine; }
+
+  GameControlGroup? getGameControlGroup() { return _gameControlGroup; }
+
   bool _controlCollision(GameControl a, GameControl b) {
     return
       _lineCollision(a.x, a.x + a.width,  b.x, b.x + b.width) &&
@@ -166,6 +170,8 @@ class GameControl {
   bool _lineCollisionSub(double s1, double e1, double s2, double e2) {
     return ((s2 >= s1) && (s2 <= e1)) || ((e2 >= s1) && (e2 <= e1));
   }
+
+  GameEngine? _gameEngine;
 
   double x = 0;
   double y = 0;
@@ -182,7 +188,7 @@ class GameControl {
     _deleted = value;
 
     // 동작 중인 컨트롤를 리스트에서 바로 삭제하면 index 에러가 발생한다. (배치 처리)
-    _gameControlGroup?.addDeleteControl(this);
+    _gameControlGroup?.deleteControl(this);
   }
 
   double _startX = 0;
@@ -191,16 +197,17 @@ class GameControl {
   double _startY = 0;
   double get startY => _startY;
 
-  GameControlGroup? _gameControlGroup = null;
+  GameControlGroup? _gameControlGroup;
 }
 
 class GameControlGroup extends GameControl {
   void addControl(GameControl control) {
+    control._gameEngine = _gameEngine;
     control._gameControlGroup = this;
-    _controls.add(control);
+    _tobeAddControls.add(control);
   }
 
-  void addDeleteControl(GameControl control) {
+  void deleteControl(GameControl control) {
     _deletedControls.add(control);
   }
 
@@ -216,7 +223,15 @@ class GameControlGroup extends GameControl {
     for (var control in _controls) {
       if (control.deleted == false) control.tick(canvas, current, term);
     }
+    _addControls();
     _deleteControls();
+  }
+
+  void _addControls() {
+    for (var control in _tobeAddControls) {
+      _controls.add(control);
+    }
+    _tobeAddControls.clear();
   }
 
   void _deleteControls() {
@@ -227,5 +242,6 @@ class GameControlGroup extends GameControl {
   }
 
   List<GameControl> _controls = <GameControl>[];
+  List<GameControl> _tobeAddControls = <GameControl>[];
   List<GameControl> _deletedControls = <GameControl>[];
 }

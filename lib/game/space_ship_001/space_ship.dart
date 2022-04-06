@@ -3,8 +3,8 @@ import '../../game_engine.dart';
 import 'joystick.dart';
 import 'ship.dart';
 
-class SpaceShip001 extends StatelessWidget {
-  SpaceShip001({Key? key}) : super(key: key) {
+class SpaceShip extends StatelessWidget {
+  SpaceShip({Key? key}) : super(key: key) {
     _joystick = Joystick(
         onMove: (int direction) => {
           _ship.move(direction)

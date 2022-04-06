@@ -12,7 +12,7 @@ class Joystick extends GameControl {
     y = 500;
     width = 60;
     height = 60;
-    paint.color = Colors.red.withOpacity(0.1);
+    paint.color = Colors.grey.withOpacity(0.1);
   }
 
   @override
