@@ -178,6 +178,9 @@ class GameControl {
   }
 
   bool _controlCollision(GameControl a, GameControl b) {
+    if (a.deleted) return false;
+    if (b.deleted) return false;
+
     return
       _lineCollision(a.x, a.x + a.width,  b.x, b.x + b.width) &&
       _lineCollision(a.y, a.y + a.height, b.y, b.y + b.height);
