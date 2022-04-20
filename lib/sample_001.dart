@@ -40,7 +40,7 @@ class SimpleCircle extends GameControl {
   }
 
   @override
-  void tick(Canvas canvas, int current, int term) {
+  void tick(Canvas canvas, Size size, int current, int term) {
     canvas.drawCircle(Offset(x + width / 2, y + height / 2), width / 2, paint);
   }
 }
@@ -56,7 +56,7 @@ class AnimatedCircle extends GameControl {
   }
 
   @override
-  void tick(Canvas canvas, int current, int term) {
+  void tick(Canvas canvas, Size size, int current, int term) {
     var radius = (width / 2)  + 6 * sin(current / 500);
     canvas.drawCircle(Offset(x + width / 2, y + height / 2), radius, paint);
   }
@@ -74,7 +74,7 @@ class BoxControl extends GameControl {
   }
 
   @override
-  void tick(Canvas canvas, int current, int term) {
+  void tick(Canvas canvas, Size size, int current, int term) {
     canvas.drawRect(Rect.fromLTRB(x, y, x + width, y + height), paint);
   }
 
@@ -102,7 +102,7 @@ class CircleControl extends GameControl {
   }
 
   @override
-  void tick(Canvas canvas, int current, int term) {
+  void tick(Canvas canvas, Size size, int current, int term) {
     paint.color = Colors.greenAccent;
     canvas.drawCircle(Offset(x + width / 2, y + height / 2), width / 2, paint);
 

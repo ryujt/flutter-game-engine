@@ -4,6 +4,7 @@ import 'package:temp/game_engine.dart';
 
 typedef MoveCallback = void Function(int direction);
 
+const BUTTON_RADIUS = 30.0;
 const BUTTON_POSITION_LEFT = -1;
 const BUTTON_POSITION_RIGHT = 1;
 
@@ -13,7 +14,7 @@ class Joystick extends GameControl {
   Joystick({required this.onMove});
 
   @override
-  void onStart(Canvas canvas, int current) {
+  void onStart(Canvas canvas, Size size, int current) {
     getGameControlGroup()?.addControl(Button(joystick: this, direction: -1));
     getGameControlGroup()?.addControl(Button(joystick: this, direction: 1));
   }
@@ -23,25 +24,24 @@ class Button extends GameControl {
   final Joystick joystick;
   final int direction;
 
-  Button({required this.joystick, required this.direction}) {
-    switch(direction) {
-      case BUTTON_POSITION_LEFT:
-        x = 20;
-        break;
-      case BUTTON_POSITION_RIGHT:
-        x = 330;
-        break;
-    }
-
-    y = 500;
-    width = 60;
-    height = 60;
-    paint.color = Colors.grey.withOpacity(0.1);
-  }
+  Button({required this.joystick, required this.direction});
 
   @override
-  void tick(Canvas canvas, int current, int term) {
-    canvas.drawCircle(Offset(x + 30, y + 30), 30, paint);
+  void onStart(Canvas canvas, Size size, int current) {
+    y = 500;
+    width = BUTTON_RADIUS * 2;
+    height = BUTTON_RADIUS * 2;
+    paint.color = Colors.grey.withOpacity(0.1);
+
+    const BUTTON_MARGIN = 20.0;
+    switch(direction) {
+      case BUTTON_POSITION_LEFT:
+        x = BUTTON_MARGIN;
+        break;
+      case BUTTON_POSITION_RIGHT:
+        x = size.width - width - BUTTON_MARGIN;
+        break;
+    }
   }
 
   @override
@@ -52,5 +52,10 @@ class Button extends GameControl {
   @override
   void onHorizontalDragEnd(DragEndDetails details) {
     joystick.onMove(0);
+  }
+
+  @override
+  void tick(Canvas canvas, Size size, int current, int term) {
+    canvas.drawCircle(Offset(x + BUTTON_RADIUS, y + BUTTON_RADIUS), BUTTON_RADIUS, paint);
   }
 }

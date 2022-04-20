@@ -16,7 +16,7 @@ class Joystick extends GameControl {
   }
 
   @override
-  void tick(Canvas canvas, int current, int term) {
+  void tick(Canvas canvas, Size size, int current, int term) {
     canvas.drawCircle(Offset(x + 30, y + 30), 30, paint);
   }
 

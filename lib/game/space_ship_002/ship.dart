@@ -2,25 +2,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:temp/game_engine.dart';
 
+const SHIP_SIZE = 60.0;
+
 class Ship extends GameControl {
-  Ship() {
-    x = (375 - 60) / 2;
+  @override
+  void onStart(Canvas canvas, Size size, int current) {
+    width = SHIP_SIZE;
+    height = SHIP_SIZE;
+    x = (size.width - width) / 2;
     y = 500;
-    width = 60;
-    height = 60;
     paint.color = Colors.blue;
+  }
+
+  @override
+  void tick(Canvas canvas, Size size, int current, int term) {
+    x = x + _direction;
+    canvas.drawCircle(Offset( x + SHIP_SIZE / 2, y + SHIP_SIZE / 2 ), SHIP_SIZE / 2, paint);
   }
 
   bool checkCollisionAndExplode(GameControl target) {
     var result = checkCollision(target);
     if (result) deleted = true;
     return result;
-  }
-
-  @override
-  void tick(Canvas canvas, int current, int term) {
-    x = x + _direction;
-    canvas.drawCircle(Offset( x + 30, y + 30 ), 30, paint);
   }
 
   void move(int direction) {

@@ -11,7 +11,7 @@ class Asteroids extends GameControl {
   Asteroids({required this.onCheckCollision});
 
   @override
-  void tick(Canvas canvas, int current, int term) {
+  void tick(Canvas canvas, Size size, int current, int term) {
     _term = _term + term;
     while (_term >= _relaseInterval) {
       _term = _term - _relaseInterval;
@@ -42,7 +42,7 @@ class Asteroid extends GameControl {
   }
 
   @override
-  void tick(Canvas canvas, int current, int term) {
+  void tick(Canvas canvas, Size size, int current, int term) {
     y = y + _speed;
     if (y > 590) deleted = true;
     canvas.drawCircle(Offset( x + 15, y + 15 ), 15, paint);

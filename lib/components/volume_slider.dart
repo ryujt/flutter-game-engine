@@ -56,7 +56,7 @@ class SliderThumb extends GameControl {
   }
 
   @override
-  void tick(Canvas canvas, int current, int term) {
+  void tick(Canvas canvas, Size size, int current, int term) {
     paint.color = Colors.grey;
     paint.style = PaintingStyle.fill;
     canvas.drawPath(_path, paint);

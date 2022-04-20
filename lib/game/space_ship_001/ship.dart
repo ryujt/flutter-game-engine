@@ -12,7 +12,7 @@ class Ship extends GameControl {
   }
 
   @override
-  void tick(Canvas canvas, int current, int term) {
+  void tick(Canvas canvas, Size size, int current, int term) {
     x = x + _direction;
     canvas.drawCircle(Offset( x + 30, y + 30 ), 30, paint);
   }

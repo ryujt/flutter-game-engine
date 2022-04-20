@@ -96,7 +96,7 @@ class GamePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    controlGroup.tick(canvas, current, term);
+    controlGroup.tick(canvas, size, current, term);
   }
 
   @override
@@ -110,17 +110,19 @@ class GameControl {
    * 게임 엔진이 주기적으로 실행하는 메소드 (타임 슬라이스)
    * 게임 컨트롤의 그리기와 프로세스 구현을 상속받아서 처리한다.
    * @param canvas 게임엔진 화면 그리기 겍체
+   * @param size 게임 엔진의 화면 크기
    * @param current 게임엔진이 시작된 이후 흐른 시간 (ms)
    * @param term 이전 tick과의 간격 (ms)
    */
-  void tick(Canvas canvas, int current, int term) {}
+  void tick(Canvas canvas, Size size, int current, int term) {}
 
   /**
    * 게임 엔진에서 처음으로 tick이 실행되기 전 한 번만 발생
    * @param canvas 게임엔진 화면 그리기 겍체
+   * @param size 게임 엔진의 화면 크기
    * @param current 게임엔진이 시작된 이후 흐른 시간 (ms)
    */
-  void onStart(Canvas canvas, int current) {}
+  void onStart(Canvas canvas, Size size, int current) {}
 
   void onHorizontalDragStart(DragStartDetails details) {}
   void onHorizontalDragUpdate(DragUpdateDetails details) {}
@@ -166,13 +168,13 @@ class GameControl {
 
   GameControlGroup? getGameControlGroup() { return _gameControlGroup; }
 
-  void _tick(Canvas canvas, int current, int term) {
+  void _tick(Canvas canvas, Size size, int current, int term) {
     if (_started == false) {
       _started = true;
-      onStart(canvas, current);
+      onStart(canvas, size, current);
     }
 
-    tick(canvas, current, term);
+    tick(canvas, size, current, term);
   }
 
   bool _controlCollision(GameControl a, GameControl b) {
@@ -238,9 +240,9 @@ class GameControlGroup extends GameControl {
   }
 
   @override
-  void tick(Canvas canvas, int current, int term) {
+  void tick(Canvas canvas, Size size,int current, int term) {
     for (var control in _controls) {
-      if (control.deleted == false) control._tick(canvas, current, term);
+      if (control.deleted == false) control._tick(canvas, size, current, term);
     }
     _addControls();
     _deleteControls();
