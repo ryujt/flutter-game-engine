@@ -137,17 +137,11 @@ class GameControl {
   }
 
   void sendToBack() {
-    if (_gameControlGroup == null) return;
-
-    _gameControlGroup!._controls.remove(this);
-    _gameControlGroup!._controls.insert(0, this);
+    _gameControlGroup?._sendToBackControls.add(this);
   }
 
   void bringToFront() {
-    if (_gameControlGroup == null) return;
-
-    _gameControlGroup!._controls.remove(this);
-    _gameControlGroup!._controls.add(this);
+    _gameControlGroup?._bringToFrontControls.add(this);
   }
 
   bool checkCollision(GameControl target) {
@@ -247,25 +241,36 @@ class GameControlGroup extends GameControl {
     for (var control in _controls) {
       if (control.deleted == false) control._tick(canvas, size, current, term);
     }
-    _addControls();
-    _deleteControls();
+    _arrangeControls();
   }
 
-  void _addControls() {
+  void _arrangeControls() {
     for (var control in _tobeAddControls) {
       _controls.add(control);
     }
     _tobeAddControls.clear();
-  }
 
-  void _deleteControls() {
     for (var control in _deletedControls) {
       _controls.remove(control);
     }
     _deletedControls.clear();
+
+    for (var control in _sendToBackControls) {
+      _controls.remove(control);
+      _controls.insert(0, control);
+    }
+    _sendToBackControls.clear();
+
+    for (var control in _bringToFrontControls) {
+      _controls.remove(control);
+      _controls.add(control);
+    }
+    _bringToFrontControls.clear();
   }
 
   List<GameControl> _controls = <GameControl>[];
   List<GameControl> _tobeAddControls = <GameControl>[];
   List<GameControl> _deletedControls = <GameControl>[];
+  List<GameControl> _sendToBackControls = <GameControl>[];
+  List<GameControl> _bringToFrontControls = <GameControl>[];
 }
