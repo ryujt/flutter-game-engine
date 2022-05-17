@@ -96,7 +96,7 @@ class GamePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    controlGroup.tick(canvas, size, current, term);
+    controlGroup.repeat(canvas, size, current, term);
   }
 
   @override
@@ -108,6 +108,17 @@ class GamePainter extends CustomPainter {
 class GameControl {
   /**
    * 게임 엔진이 주기적으로 실행하는 메소드 (타임 슬라이스)
+   */
+  void repeat(Canvas canvas, Size size, int current, int term) {
+    if (_started == false) {
+      _started = true;
+      onStart(canvas, size, current);
+    }
+
+    tick(canvas, size, current, term);
+  }
+
+  /**
    * 게임 컨트롤의 그리기와 프로세스 구현을 상속받아서 처리한다.
    * @param canvas 게임엔진 화면 그리기 겍체
    * @param size 게임 엔진의 화면 크기
@@ -161,15 +172,6 @@ class GameControl {
   GameEngine? getGameEngine() { return _gameEngine; }
 
   GameControlGroup? getGameControlGroup() { return _gameControlGroup; }
-
-  void _tick(Canvas canvas, Size size, int current, int term) {
-    if (_started == false) {
-      _started = true;
-      onStart(canvas, size, current);
-    }
-
-    tick(canvas, size, current, term);
-  }
 
   bool _controlCollision(GameControl a, GameControl b) {
     if (a.deleted) return false;
@@ -237,9 +239,10 @@ class GameControlGroup extends GameControl {
   }
 
   @override
-  void tick(Canvas canvas, Size size,int current, int term) {
+  void repeat(Canvas canvas, Size size,int current, int term) {
+    super.repeat(canvas, size, current, term);
     for (var control in _controls) {
-      if (control.deleted == false) control._tick(canvas, size, current, term);
+      if (control.deleted == false) control.repeat(canvas, size, current, term);
     }
     _arrangeControls();
   }
