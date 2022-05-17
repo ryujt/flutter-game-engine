@@ -233,7 +233,12 @@ class GameControlGroup extends GameControl {
 
   GameControl? selectControl(double x, double y) {
     for (var i=_controls.length-1; i>=0; i--) {
-      if (_controls[i].checkArea(x, y)) return _controls[i];
+      if (_controls[i] is GameControlGroup) {
+        var control = (_controls[i] as GameControlGroup).selectControl(x, y);
+        if (control != null) return control;
+      } else {
+        if (_controls[i].checkArea(x, y)) return _controls[i];
+      }
     }
     return null;
   }
