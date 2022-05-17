@@ -115,7 +115,7 @@ class GameControl {
       onStart(canvas, size, current);
     }
 
-    tick(canvas, size, current, term);
+    if (visible) tick(canvas, size, current, term);
   }
 
   /**
