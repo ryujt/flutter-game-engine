@@ -4,7 +4,7 @@ import 'package:temp/sample_000.dart';
 import 'package:temp/sample_001.dart';
 import 'package:temp/sample_002.dart';
 
-import 'package:temp/game/space_ship_002/space_ship.dart';
+import 'package:temp/game/space_ship_003/space_ship.dart';
 
 void main() => runApp(MyApp());
 
