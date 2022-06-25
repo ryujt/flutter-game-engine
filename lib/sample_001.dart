@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'components/box.dart';
-import 'components/circle.dart';
+import 'components/animated_circle.dart';
 import 'game_engine.dart';
 
 class Sample001 extends StatelessWidget {
   Sample001({Key? key}) : super(key: key) {
-    _gameEngine.getControls().addControl(BoxControl());
-    _gameEngine.getControls().addControl(CircleControl());
+    _gameEngine.getControls().addControl(AnimatedCircle());
     _gameEngine.start();
   }
 
