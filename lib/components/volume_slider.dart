@@ -14,17 +14,16 @@ class VolumeSlider extends StatelessWidget {
   VolumeSlider({required this.onChanged, required this.min, required this.max, required this.width, required this.height}) {
     _sliderThumb = SliderThumb(this);
     _gameEngine.getControls().addControl(_sliderThumb);
+    _gameEngine.start();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-        top: 40,
-        left: 0,
-        child: Container(
-            width: width,
-            height: height,
-            child: _gameEngine.getCustomPaint()));
+    return SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: _gameEngine.getCustomPaint()
+    );
   }
 
   void setVolume(double value) {
