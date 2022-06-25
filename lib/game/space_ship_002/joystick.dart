@@ -4,7 +4,7 @@ import 'package:temp/game_engine.dart';
 
 typedef MoveCallback = void Function(int direction);
 
-const BUTTON_RADIUS = 30.0;
+const BUTTON_SIZE = 60.0;
 const BUTTON_POSITION_LEFT = -1;
 const BUTTON_POSITION_RIGHT = 1;
 
@@ -28,9 +28,9 @@ class Button extends GameControl {
 
   @override
   void onStart(Canvas canvas, Size size, int current) {
-    y = 500;
-    width = BUTTON_RADIUS * 2;
-    height = BUTTON_RADIUS * 2;
+    y = size.height - BUTTON_SIZE * 2;
+    width = BUTTON_SIZE ;
+    height = BUTTON_SIZE;
     paint.color = Colors.grey.withOpacity(0.1);
 
     const BUTTON_MARGIN = 20.0;
@@ -56,6 +56,7 @@ class Button extends GameControl {
 
   @override
   void tick(Canvas canvas, Size size, int current, int term) {
-    canvas.drawCircle(Offset(x + BUTTON_RADIUS, y + BUTTON_RADIUS), BUTTON_RADIUS, paint);
+    const radius = BUTTON_SIZE / 2;
+    canvas.drawCircle(Offset(x + radius, y + radius), radius, paint);
   }
 }

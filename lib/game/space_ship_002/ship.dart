@@ -10,14 +10,16 @@ class Ship extends GameControl {
     width = SHIP_SIZE;
     height = SHIP_SIZE;
     x = (size.width - width) / 2;
-    y = 500;
+    y = size.height - SHIP_SIZE * 2;
     paint.color = Colors.blue;
   }
 
   @override
   void tick(Canvas canvas, Size size, int current, int term) {
     x = x + _direction;
-    canvas.drawCircle(Offset( x + SHIP_SIZE / 2, y + SHIP_SIZE / 2 ), SHIP_SIZE / 2, paint);
+
+    const radius = SHIP_SIZE / 2;
+    canvas.drawCircle(Offset(x +radius, y + radius), radius, paint);
   }
 
   bool checkCollisionAndExplode(GameControl target) {

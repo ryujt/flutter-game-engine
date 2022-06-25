@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:temp/game/space_ship_002/space_ship.dart';
+import 'package:temp/game/space_ship_001/space_ship.dart';
 
 void main() => runApp(MyApp());
 
