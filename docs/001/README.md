@@ -84,7 +84,7 @@ class Sample000 extends StatelessWidget {
 }
 ```
 * 25: GameEngine 클래스의 인스턴스를 생성합니다.
-* 6-9: MyHomePage의 생성자에서 GameEngine을 초기화 합니다.
+* 6-9: Sample000의 생성자에서 GameEngine을 초기화 합니다.
   * 7: 게임엔진이 처리할 SimpleCircle의 인스턴스를 생성해서 추가합니다.
   * 8: 게임엔진을 시작합니다.
 * 17-21: 화면의 body 부분에 게임엔진 위젯을 덮어 씌웁니다. 참고로 게임엔진은 CustomPaint를 이용해서 만들어 져 있습니다.
