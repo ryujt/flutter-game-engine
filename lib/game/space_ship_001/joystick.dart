@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../game_engine.dart';
 
 const BUTTON_SIZE = 60.0;
@@ -30,7 +29,7 @@ class Joystick extends GameControl {
 
   @override
   void onHorizontalDragStart(DragStartDetails details) {
-    onMove(-1);
+    onMove(BUTTON_POSITION_LEFT);
   }
 
   @override

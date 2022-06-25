@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:temp/game_engine.dart';
+import '../../game_engine.dart';
 
 const SHIP_SIZE = 60.0;
 
