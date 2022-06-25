@@ -154,8 +154,8 @@ sample_000.dart과 유사하기 때문에 달라진 부분만 표시하였습니
 
 ``` dart
 ...
-class Sample000 extends StatelessWidget {
-  Sample000({Key? key}) : super(key: key) {
+class Sample001 extends StatelessWidget {
+  Sample001({Key? key}) : super(key: key) {
     _gameEngine.getControls().addControl(SimpleCircle());
     _gameEngine.start();
   }
@@ -225,8 +225,8 @@ sample_000.dart과 유사하기 때문에 달라진 부분만 표시하였습니
 
 ``` dart
 ...
-class Sample000 extends StatelessWidget {
-  Sample000({Key? key}) : super(key: key) {
+class Sample002 extends StatelessWidget {
+  Sample002({Key? key}) : super(key: key) {
     _gameEngine.getControls().addControl(BoxControl());
     _gameEngine.start();
   }
@@ -286,8 +286,8 @@ class BoxControl extends GameControl {
 
 ``` dart
 ...
-class Sample000 extends StatelessWidget {
-  Sample000({Key? key}) : super(key: key) {
+class Sample002 extends StatelessWidget {
+  Sample002({Key? key}) : super(key: key) {
     _gameEngine.getControls().addControl(BoxControl());
     _gameEngine.getControls().addControl(CircleControl()); // 추가됨
     _gameEngine.start();
