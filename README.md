@@ -6,3 +6,14 @@
 자세한 설명은 아래 링크를 참고하시기 바랍니다.
 
 * [https://ryujt.github.io/flutter-game-engine/](https://ryujt.github.io/flutter-game-engine/)
+
+## 소스 다운로드 방법
+
+git submodule을 사용하고 있습니다.
+git clone 이후에 서브모듈을 초기화 해주세요.
+최초 한 번만 실행하시면 됩니다.
+
+```
+% git submodule init
+% git submodule update
+```
