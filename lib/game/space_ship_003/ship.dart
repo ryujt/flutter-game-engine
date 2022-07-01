@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../game_engine.dart';
+import '../../../utils/ryulib/game_engine.dart';
 
 const SHIP_SIZE = 60.0;
 

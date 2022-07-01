@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../game_engine.dart';
+import '../utils/ryulib/game_engine.dart';
 
 class CircleControl extends GameControl {
   CircleControl() {

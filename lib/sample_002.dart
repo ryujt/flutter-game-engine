@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'components/box.dart';
 import 'components/circle.dart';
-import 'game_engine.dart';
+import './utils/ryulib/game_engine.dart';
 
 class Sample002 extends StatelessWidget {
   Sample002({Key? key}) : super(key: key) {
