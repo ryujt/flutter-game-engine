@@ -157,7 +157,7 @@ sample_000.dart과 유사하기 때문에 달라진 부분만 표시하였습니
 ...
 class Sample001 extends StatelessWidget {
   Sample001({Key? key}) : super(key: key) {
-    _gameEngine.getControls().addControl(SimpleCircle());
+    _gameEngine.getControls().addControl(AnimatedCircle());
     _gameEngine.start();
   }
   ...
@@ -281,14 +281,14 @@ class BoxControl extends GameControl {
 
 ![](./pic-06.png)
 
-#### sample_002.dart
+#### sample_003.dart
 
 기존 코드에서 CircleControl() 부분을 추가합니다.
 
 ``` dart
 ...
-class Sample002 extends StatelessWidget {
-  Sample002({Key? key}) : super(key: key) {
+class Sample003 extends StatelessWidget {
+  Sample003({Key? key}) : super(key: key) {
     _gameEngine.getControls().addControl(BoxControl());
     _gameEngine.getControls().addControl(CircleControl()); // 추가됨
     _gameEngine.start();
