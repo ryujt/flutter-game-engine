@@ -19,7 +19,7 @@
 
 * Ship
   * 이동 (좌, 우)
-  * Missile 발생
+  * Missile 발사
   * 충돌 검사
   * 폭파
 * Missile
