@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'components/volume_slider.dart';
+import 'components/box.dart';
+import 'components/circle.dart';
+import './utils/ryulib/game_engine.dart';
 
 class Sample003 extends StatelessWidget {
   Sample003({Key? key}) : super(key: key) {
+    _gameEngine.getControls().addControl(BoxControl());
+    _gameEngine.getControls().addControl(CircleControl());
+    _gameEngine.start();
   }
 
   @override
@@ -14,15 +19,10 @@ class Sample003 extends StatelessWidget {
         body: SizedBox(
             width: double.infinity,
             height: double.infinity,
-            child: VolumeSlider(
-                min: 0,
-                max: 100,
-                width: 40,
-                height: 200,
-                onChanged: (double volume) { print(volume); },
-              )
+            child: _gameEngine.getCustomPaint()
         )
     );
   }
-}
 
+  final _gameEngine = GameEngine();
+}

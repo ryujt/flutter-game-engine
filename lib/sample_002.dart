@@ -6,7 +6,6 @@ import './utils/ryulib/game_engine.dart';
 class Sample002 extends StatelessWidget {
   Sample002({Key? key}) : super(key: key) {
     _gameEngine.getControls().addControl(BoxControl());
-    _gameEngine.getControls().addControl(CircleControl());
     _gameEngine.start();
   }
 

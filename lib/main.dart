@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import './sample_000.dart';
 import './sample_001.dart';
 import './sample_002.dart';
+import './sample_003.dart';
+import './sample_004.dart';
 
 import 'game/space_ship_003/space_ship.dart';
 
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SpaceShip(),
+      home: Sample004(),
     );
   }
 }
