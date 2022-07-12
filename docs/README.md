@@ -14,4 +14,4 @@
 * [슈팅 게임만들기 #2](./game/space_ship/002/)
 * [슈팅 게임만들기 #3](./game/space_ship/003/)
 * [슈팅 게임만들기 #4](./game/space_ship/004/)
-* [슈팅 게임만들기 #4](./game/space_ship/005/)
+* [슈팅 게임만들기 #5](./game/space_ship/005/)
