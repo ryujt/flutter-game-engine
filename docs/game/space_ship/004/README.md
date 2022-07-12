@@ -3,77 +3,62 @@
 
 ## 학습목표
 
-* Joystick을 두 개의 버튼을 포함하여 좌우로 우주선이 이동할 수 있도록 합니다.
+* 게임 컨트롤 끼리 충돌했는 지를 확인하고 처리하는 방법을 배웁니다.
 
 
-## 구현
+## 소행성 충돌 테스트
 
-### Joystick class
+![](./pic-2.png)
+
+### asteroids.dart
 
 ``` dart
-import 'package:flutter/material.dart';
-import '../../game_engine.dart';
+...
+typedef CheckCollisionCallback = bool Function(GameControl target);
 
-typedef MoveCallback = void Function(int direction);
+class Asteroids extends GameControl {
+  final CheckCollisionCallback onCheckCollision;
 
-const BUTTON_SIZE = 60.0;
-const BUTTON_POSITION_LEFT = -1;
-const BUTTON_POSITION_RIGHT = 1;
+  Asteroids({required this.onCheckCollision});
 
-class Joystick extends GameControl {
-  final MoveCallback onMove;
-
-  Joystick({required this.onMove});
-
-  @override
-  void onStart(Canvas canvas, Size size, int current) {
-    getGameControlGroup()?.addControl(Button(joystick: this, direction: BUTTON_POSITION_LEFT));
-    getGameControlGroup()?.addControl(Button(joystick: this, direction: BUTTON_POSITION_RIGHT));
+  void _createAsteroid(Size size) {
+    var _x = _random.nextDouble() * (size.width - ASTEROID_SIZE);
+    getGameControlGroup()?.addControl(Asteroid(_x, 0, onCheckCollision));
   }
+  ...
 }
-```
 
-### Button class
-
-``` dart
-class Button extends GameControl {
-  final Joystick joystick;
-  final int direction;
-
-  Button({required this.joystick, required this.direction});
-
-  @override
-  void onStart(Canvas canvas, Size size, int current) {
-    y = size.height - BUTTON_SIZE * 2;
-    width = BUTTON_SIZE ;
-    height = BUTTON_SIZE;
-    paint.color = Colors.grey.withOpacity(0.1);
-
-    const BUTTON_MARGIN = 20.0;
-    switch(direction) {
-      case BUTTON_POSITION_LEFT:
-        x = BUTTON_MARGIN;
-        break;
-      case BUTTON_POSITION_RIGHT:
-        x = size.width - width - BUTTON_MARGIN;
-        break;
-    }
-  }
-
-  @override
-  void onHorizontalDragStart(DragStartDetails details) {
-    joystick.onMove(direction);
-  }
-
-  @override
-  void onHorizontalDragEnd(DragEndDetails details) {
-    joystick.onMove(0);
+class Asteroid extends GameControl {
+  Asteroid(double ax, double ay, CheckCollisionCallback onCheckCollision)
+  {
+    ...
+    _onCheckCollision = onCheckCollision;
   }
 
   @override
   void tick(Canvas canvas, Size size, int current, int term) {
-    const radius = BUTTON_SIZE / 2;
-    canvas.drawCircle(Offset(x + radius, y + radius), radius, paint);
+    ...
+    if (_onCheckCollision != null) {
+      if (_onCheckCollision!(this)) deleted = true;
+    }
   }
+
+  double _speed = 2;
+  CheckCollisionCallback? _onCheckCollision;
+}
+```
+
+### ship.dart
+
+``` dart
+...
+class Ship extends GameControl {
+  ...
+  bool checkCollisionAndExplode(GameControl target) {
+    var result = checkCollision(target);
+    if (result) deleted = true;
+    return result;
+  }
+  ...
 }
 ```
