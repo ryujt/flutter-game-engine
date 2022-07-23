@@ -62,3 +62,22 @@ class Ship extends GameControl {
   ...
 }
 ```
+
+### space_ship.dart
+
+``` dart
+...
+class SpaceShip extends StatelessWidget {
+  SpaceShip({Key? key}) : super(key: key) {
+    ...
+    _asteroids = Asteroids(
+      onCheckCollision: (GameControl target) {
+        return _ship.checkCollisionAndExplode(target);
+      }
+    );
+    ...
+  }
+  ...
+}
+
+```
