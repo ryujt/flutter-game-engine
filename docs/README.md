@@ -9,9 +9,9 @@
 * [게임엔진 구조 설명](./002/)
 
 
-## 슈팅 게임만들기 프로젝트
-* [슈팅 게임만들기 #1](./game/space_ship/001/)
-* [슈팅 게임만들기 #2](./game/space_ship/002/)
-* [슈팅 게임만들기 #3](./game/space_ship/003/)
-* [슈팅 게임만들기 #4](./game/space_ship/004/)
-* [슈팅 게임만들기 #5](./game/space_ship/005/)
+## 슈팅게임 만들기 프로젝트
+* [슈팅게임 만들기 #1](./game/space_ship/001/)
+* [슈팅게임 만들기 #2](./game/space_ship/002/)
+* [슈팅게임 만들기 #3](./game/space_ship/003/)
+* [슈팅게임 만들기 #4](./game/space_ship/004/)
+* [슈팅게임 만들기 #5](./game/space_ship/005/)
