@@ -1,16 +1,6 @@
-# 슈팅게임 만들기 #4
+import 'package:flutter/material.dart';
+import '../../utils/ryulib/game_engine.dart';
 
-
-## 학습목표
-
-* Joystick을 두 개의 버튼을 포함하여 좌우로 우주선이 이동할 수 있도록 합니다.
-
-
-## 구현
-
-### Button class
-
-``` dart
 typedef NotificationCallback = void Function();
 
 const BUTTON_SIZE = 60.0;
@@ -58,36 +48,3 @@ class Button extends GameControl {
     canvas.drawCircle(Offset(x + radius, y + radius), radius, paint);
   }
 }
-```
-
-### Joystick class
-
-``` dart
-typedef MoveCallback = void Function(int direction);
-
-class Joystick extends GameControl {
-  final MoveCallback onMove;
-
-  Joystick({required this.onMove});
-
-  @override
-  void onStart(Canvas canvas, Size size, int current) {
-    getGameControlGroup()?.addControl(
-        Button(
-            onDown: () => onMove(BUTTON_POSITION_LEFT),
-            onUp: () => onMove(0),
-            direction: BUTTON_POSITION_LEFT
-        )
-    );
-
-    getGameControlGroup()?.addControl(
-        Button(
-            onDown: () => onMove(BUTTON_POSITION_RIGHT),
-            onUp: () => onMove(0),
-            direction: BUTTON_POSITION_RIGHT
-        )
-    );
-  }
-}
-```
-
